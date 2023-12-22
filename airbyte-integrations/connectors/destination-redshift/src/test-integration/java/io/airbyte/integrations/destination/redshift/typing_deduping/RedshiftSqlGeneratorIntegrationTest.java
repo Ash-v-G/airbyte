@@ -38,6 +38,9 @@ import javax.sql.DataSource;
 import org.jooq.DSLContext;
 import org.jooq.DataType;
 import org.jooq.Field;
+import org.jooq.InsertValuesStepN;
+import org.jooq.Name;
+import org.jooq.Record;
 import org.jooq.SQLDialect;
 import org.jooq.conf.Settings;
 import org.jooq.impl.DSL;
@@ -204,16 +207,6 @@ public class RedshiftSqlGeneratorIntegrationTest extends JdbcSqlGeneratorIntegra
         () -> assertEquals("date", existingTable.get().columns().get("date").type()),
         () -> assertEquals("super", existingTable.get().columns().get("unknown").type()));
     // TODO assert on table clustering, etc.
-  }
-
-  private static String escapeStringLiteral(final String str) {
-    if (str == null) {
-      return null;
-    } else {
-      // jooq handles most things
-      // but we need to manually escape backslashes for some reason
-      return str.replace("\\", "\\\\");
-    }
   }
 
 }
